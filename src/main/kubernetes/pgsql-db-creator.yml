@@ -3,6 +3,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: petclinic-schema
+  labels:
+    app: psql-init-job
 spec:
   ttlSecondsAfterFinished: 100
   template:
@@ -22,10 +24,14 @@ spec:
               value: developer
 
           command: ["/usr/pgsql-12/bin/psql"]
-          args:
-            [
-              "--dbname=mydb",
-              "--no-password",
-            ]
+          volumeMounts:
+            - name: init-dump
+              mountPath: /tmp/import.sql
+              subPath: import.sql
+          args: ["--dbname=mydb", "--no-password", "--file=/tmp/import.sql"]
       restartPolicy: Never
+      volumes:
+        - name: init-dump
+          configMap:
+            name: postgres-init-dump
   backoffLimit: 1

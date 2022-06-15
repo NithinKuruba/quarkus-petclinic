@@ -1,0 +1,18 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-from-ingress-to-app
+  namespace: nithinkuruba-dev
+  labels:
+    app: quarkus-petclinic
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: quarkus-petclinic
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network.openshift.io/policy-group: ingress
+  policyTypes:
+    - Ingress

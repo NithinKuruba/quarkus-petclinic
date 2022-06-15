@@ -5,12 +5,11 @@ metadata:
   name: postgresql
   namespace: nithinkuruba-dev
   labels:
-    app.kubernetes.io/name: quarkus-petclinic
-    app.kubernetes.io/version: 1.0.0
+    app.kubernetes.io/instance: postgresql
+    app.kubernetes.io/name: postgresql
 spec:
   selector:
-    app.kubernetes.io/name: quarkus-petclinic
-    app.kubernetes.io/version: 1.0.0
+    name: postgresql
   ports:
     - name: pgsql
       port: 5432
@@ -23,32 +22,21 @@ metadata:
   name: postgresql
   namespace: nithinkuruba-dev
   labels:
-    app.kubernetes.io/name: quarkus-petclinic
-    app.kubernetes.io/version: 1.0.0
+    app.kubernetes.io/instance: postgresql
+    app.kubernetes.io/name: postgresql
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app.kubernetes.io/name: quarkus-petclinic
-      app.kubernetes.io/version: 1.0.0
+      name: postgresql
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: quarkus-petclinic
-        app.kubernetes.io/version: 1.0.0
+        name: postgresql
     spec:
       restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
-      schedulerName: default-scheduler
-      securityContext:
-        fsGroup: 1025130000
-      securityContext:
-            runAsUser: 1025130000
-            runAsNonRoot: true
       containers:
         - name: postgresql
           image: quay.io/redhatdemo/openshift-pgsql12-primary:centos7

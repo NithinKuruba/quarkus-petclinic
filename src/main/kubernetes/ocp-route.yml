@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: quarkus-petclinic-dev
+  namespace: nithinkuruba-dev
+  labels:
+    app.kubernetes.io/name: quarkus-petclinic
+    app.kubernetes.io/version: 1.0.0
+spec:
+  host: quarkus-petclinic-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: quarkus-petclinic
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
