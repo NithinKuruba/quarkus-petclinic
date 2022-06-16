@@ -14,4 +14,4 @@ kubectl apply -f src/main/kubernetes/deployment.yml
 kubectl wait --for=condition=available --timeout=60s deployment/quarkus-petclinic
 
 # create a route to access the app
-kubectl apply -f src/main/kubernetes/ocp_route.yml
+kubectl apply -f src/main/kubernetes/ocp-route.yml
