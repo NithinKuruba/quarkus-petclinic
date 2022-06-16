@@ -24,7 +24,7 @@ import io.quarkus.qute.TemplateInstance;
 
 @Path("/owners")
 public class VisitResource {
-    
+
     @Inject
     TemplatesLocale templates;
 
@@ -42,13 +42,13 @@ public class VisitResource {
     @Path("{ownerId}/pets/{petId}/visits/new")
     @Produces(MediaType.TEXT_HTML)
     @Transactional
-    public TemplateInstance processCreationForm(@PathParam("petId") Long petId,  @BeanParam Visit visit) {
+    public TemplateInstance processCreationForm(@PathParam("petId") Long petId, @BeanParam Visit visit) {
 
         Pet pet = Pet.findById(petId);
         final Set<ConstraintViolation<Visit>> violations = validator.validate(visit);
         final Map<String, String> errors = new HashMap<>();
         if (!violations.isEmpty()) {
-            
+
             for (ConstraintViolation<Visit> violation : violations) {
                 errors.put(violation.getPropertyPath().toString(), violation.getMessage());
             }
@@ -56,7 +56,7 @@ public class VisitResource {
             return templates.createOrUpdateVisitForm(pet, visit, errors);
 
         } else {
-            
+
             visit.persist();
 
             pet.addVisit(visit);

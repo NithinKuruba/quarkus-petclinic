@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  postgresql:
+    image: quay.io/redhatdemo/openshift-pgsql12-primary:centos7
+    container_name: postgresql
+    environment:
+      PG_USER_PASSWORD: developer
+      PG_USER_NAME: developer
+      PG_DATABASE: mydb
+      PG_NETWORK_MASK: all
+    tty: true
+    ports:
+      - 5432:5432
+    networks:
+      - app-net
+  petclinic:
+    image: quay.io/nithinkuruba/quarkus-petclinic:1.0.0
+    container_name: quarkus-petclinic
+    tty: true
+    env_file:
+      - ./.env
+    ports:
+      - 8080:8080
+    networks:
+      - app-net
+
+networks:
+  app-net: {}

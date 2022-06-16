@@ -11,7 +11,7 @@ env:
   OPENSHIFT_NAMESPACE: nithinkuruba-dev
 
 jobs:
-  login:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -5,6 +5,27 @@
 ```bash
 ./mvnw compile quarkus:dev
 ```
+
+## Run in Docker
+
+- Create `.env` file at the root of the project directory and add below content
+  ```
+  QUARKUS_OIDC_CLIENT_ID=<YOUR_OIDC_CLIENT_ID>
+  QUARKUS_OIDC_CREDENTIALS_SECRET=<YOUR_OIDC_CLIENT_SECRET>
+  ```
+
+- To start the services
+
+    ```bash
+    docker-compose up -d
+    ```
+
+- To stop the services
+
+    ```bash
+    docker-compose down
+    ```
+
 ## Push New Image 
 
 ```bash
@@ -26,8 +47,8 @@
       namespace: <your_namespace>
     type: Opaque
     stringData:
-      QUARKUS_OIDC_CLIENT_ID: <OIDC_CLIENT_ID>
-      QUARKUS_OIDC_CREDENTIALS_SECRET: <OIDC_CLIENT_SECRET>
+      QUARKUS_OIDC_CLIENT_ID: <YOUR_OIDC_CLIENT_ID>
+      QUARKUS_OIDC_CREDENTIALS_SECRET: <YOUR_OIDC_CLIENT_SECRET>
     ```
 
 ### Deploy apps
