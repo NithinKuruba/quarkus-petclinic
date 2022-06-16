@@ -24,10 +24,10 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Entity
 @Table(name = "pets")
 public class Pet extends PanacheEntity {
-    
+
 	@Column(name = "name")
 	@NotEmpty
-    public String name;
+	public String name;
 
 	@Column(name = "birth_date")
 	public LocalDate birthDate;
@@ -44,10 +44,10 @@ public class Pet extends PanacheEntity {
 	public Set<Visit> visits = new LinkedHashSet<>();
 
 	public Pet attach() {
-        return getEntityManager().merge(this);
-    }
+		return getEntityManager().merge(this);
+	}
 
-    protected Set<Visit> getVisitsInternal() {
+	protected Set<Visit> getVisitsInternal() {
 		if (this.visits == null) {
 			this.visits = new HashSet<>();
 		}
@@ -67,9 +67,9 @@ public class Pet extends PanacheEntity {
 	public void addVisit(Visit visit) {
 		getVisitsInternal().add(visit);
 		visit.petId = this.id;
-    }
-    
-    public boolean isNew() {
+	}
+
+	public boolean isNew() {
 		return this.id == null;
 	}
 
